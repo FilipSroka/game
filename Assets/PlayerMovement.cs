@@ -8,6 +8,8 @@ using UnityEngine.UI;  // Required for Image component
 
 public class PlayerMovement : MonoBehaviour
 {
+    public LivesCounter livesCounter;
+
     private class DrugEffectInstance
     {
         public float timeElapsed;
@@ -114,6 +116,12 @@ public class PlayerMovement : MonoBehaviour
                 maxDistance = distanceTraveled;
             }
             lives--;
+
+            if (livesCounter != null)
+            {
+                livesCounter.LoseLife();
+            }
+
             if (lives <= 0)
             {
                 Die();
@@ -242,6 +250,8 @@ public class PlayerMovement : MonoBehaviour
         rt.sizeDelta = new Vector2(600, 200);  // Width: 600, Height: 200
         // Position the text in the center
         rt.anchoredPosition = Vector3.zero;
+        
+        
         StartCoroutine(RestartGameAfterDelay());
     
     }

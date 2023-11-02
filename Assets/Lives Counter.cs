@@ -20,12 +20,5 @@ public class LivesCounter : MonoBehaviour
             Debug.Log("Loser!");
         }
     }
-//to check if the code works. remove later.
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            LoseLife();
-        }
-    }
+
 }
