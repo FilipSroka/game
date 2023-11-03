@@ -29,6 +29,7 @@ public class CircleSpawner : MonoBehaviour
                 Destroy(circle);
             }
             circles.Clear();
+            CancelInvoke("SpawnCircle");
         }
         else if (not_started) 
         {   
