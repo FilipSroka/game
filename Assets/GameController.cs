@@ -101,7 +101,6 @@ public class GameController : MonoBehaviour
         // Calculate the desired x-coordinate for the left edge of the second block to touch the right edge of the first block
         float xCoordinate = firstEndX + secondWidth * 0.5f;
 
-        Debug.Log(xCoordinate+"X");
 
         return xCoordinate;
     }
@@ -129,7 +128,7 @@ public class Child
         }
         else 
         {
-            transform.position = new Vector2(end, 25f);
+            transform.position = new Vector2(end, 50f);
             isAvailable = true;
         }
     }
