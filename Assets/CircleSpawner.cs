@@ -8,31 +8,32 @@ public class CircleSpawner : MonoBehaviour
     public float maxSpawnRate = 10f;
     public float minDiameter = 5f;
     public float maxDiameter = 10f;
-    public int maxCircles = 20;
+    public int maxCircles = 5;
     public Color[] randomColors;
     
     private List<GameObject> circles = new List<GameObject>();
     private Camera mainCamera;
     private float spawnRate;
-    private int circleCount = 0;  // Define the circleCount variable
+    private int circleCount;  // Define the circleCount variable
+    private bool not_started = true;
     
     public void SetIntensity(float intensity)
     {
-        spawnRate = Mathf.Lerp(maxSpawnRate, minSpawnRate, intensity / 100f);
-        maxCircles = Mathf.FloorToInt(Mathf.Lerp(1, maxCircles, intensity / 100f));
-        
         if (intensity == 0)
         {
+            not_started = true;
+            circleCount = 0;
             foreach (var circle in circles)
             {
                 Destroy(circle);
             }
             circles.Clear();
         }
-        else
-        {
-            CancelInvoke("SpawnCircle");
-            InvokeRepeating("SpawnCircle", 0f, spawnRate);
+        else if (not_started) 
+        {   
+            not_started = false;
+            InvokeRepeating("SpawnCircle", 0f, 5f);
+
         }
     }
 
@@ -173,12 +174,12 @@ public class CircleSpawner : MonoBehaviour
 
     private void SpawnCircle()
     {
-        if (circleCount >= maxCircles)
+        if (circleCount >= maxCircles) 
         {
-            // Stop spawning circles if the maximum limit is reached
+            Debug.Log("RETURN");
             return;
         }
-
+        Debug.Log(circleCount+"XXX");
         Vector2 spawnPosition = new Vector2(Random.Range(-10f, 10f), Random.Range(-5f, 5f));
         GameObject circle = new GameObject("Circle");
 
