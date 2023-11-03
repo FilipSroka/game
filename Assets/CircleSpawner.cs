@@ -16,6 +16,7 @@ public class CircleSpawner : MonoBehaviour
     private float spawnRate;
     private int circleCount;  // Define the circleCount variable
     private bool not_started = true;
+    public GameObject player;
     
     public void SetIntensity(float intensity)
     {
@@ -40,12 +41,6 @@ public class CircleSpawner : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-
-        if (!IsTagDefined("Circle"))
-        {
-            Debug.Log("Tag 'Circle' does not exist. Creating it now.");
-            UnityEditorInternal.InternalEditorUtility.AddTag("Circle");
-        }
 
         bool overdosed = false;
 
@@ -160,18 +155,6 @@ public class CircleSpawner : MonoBehaviour
         }
     }
 
-    private bool IsTagDefined(string tag)
-    {
-        foreach (string definedTag in UnityEditorInternal.InternalEditorUtility.tags)
-        {
-            if (definedTag == tag)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void SpawnCircle()
     {
         if (circleCount >= maxCircles) 
@@ -180,7 +163,9 @@ public class CircleSpawner : MonoBehaviour
             return;
         }
         Debug.Log(circleCount+"XXX");
-        Vector2 spawnPosition = new Vector2(Random.Range(-10f, 10f), Random.Range(-5f, 5f));
+        // Assuming playerPosition is a reference to the player's position
+        Vector2 spawnPosition = player.transform.position + new Vector3(Random.Range(-10f, 10f), Random.Range(-5f, 5f));
+
         GameObject circle = new GameObject("Circle");
 
         float randomDiameter = Random.Range(minDiameter, maxDiameter);
