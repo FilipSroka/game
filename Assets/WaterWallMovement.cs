@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class WaterWallMovement : MonoBehaviour
 {
-    public float initialSpeed = 2.0f;
-    public float acceleration = 0.01f;
+    public float initialSpeed = 3.5f;
+    public float acceleration = 0.1f;
     private float currentSpeed;
 
     void Start()

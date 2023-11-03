@@ -20,5 +20,14 @@ public class LivesCounter : MonoBehaviour
             Debug.Log("Loser!");
         }
     }
+    public void GainLife()
+    {
+        if (livesRemaining < lives.Length) // Ensure you don't go beyond the array length
+        {
+            // Increase livesRemaining value
+            lives[livesRemaining].enabled = true; // Show images
+            livesRemaining++;
+        }
+    }
 
 }

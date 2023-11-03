@@ -108,7 +108,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("WaterDrop") || collision.gameObject.CompareTag("Water"))
+        if (collision.gameObject.CompareTag("WaterDrop") && mushroom_effect > 0)
+        {
+            isGrounded = true;
+        }
+        else if (collision.gameObject.CompareTag("WaterDrop") || collision.gameObject.CompareTag("Water"))
         {
             float distanceTraveled = transform.position.x - startingPoint.x;
             if (distanceTraveled > maxDistance)
@@ -149,6 +153,15 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.CompareTag("Cocaine") || other.CompareTag("Weed") || other.CompareTag("Mushroom"))
                 {
+
+                    if (other.CompareTag("Weed"))
+                    {
+                        if (lives <= 2)
+                        {
+                            livesCounter.GainLife();
+                            lives ++;
+                        }
+                    }
                     ApplyDrugEffect(other.tag);
                 }
     }
@@ -163,16 +176,16 @@ public class PlayerMovement : MonoBehaviour
         switch (drug)
         {
             case "Cocaine":
-                peakTime = 10;
-                totalDuration = 30;
+                peakTime = 5;
+                totalDuration = 15;
                 break;
             case "Weed":
-                peakTime = 20;
-                totalDuration = 40;
+                peakTime = 10;
+                totalDuration = 20;
                 break;
             case "Mushroom":
-                peakTime = 30;
-                totalDuration = 50;
+                peakTime = 10;
+                totalDuration = 20;
                 break;
         }
 
@@ -250,8 +263,8 @@ public class PlayerMovement : MonoBehaviour
         rt.sizeDelta = new Vector2(600, 200);  // Width: 600, Height: 200
         // Position the text in the center
         rt.anchoredPosition = Vector3.zero;
-        
-        
+
+
         StartCoroutine(RestartGameAfterDelay());
     
     }
